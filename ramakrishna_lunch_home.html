@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramakrishna Lunch Home | Authentic South Indian Breakfast</title>
+    <meta name="description" content="Experience authentic South Indian heritage cuisine at Ramakrishna Lunch Home, Kolkata. Serving generations with fresh Dosa, Idli, and Filter Coffee.">
+    <meta name="keywords" content="Ramakrishna Lunch Home, South Indian Restaurant Kolkata, Pure Veg, Breakfast, Dosa, Idli, Filter Coffee, Heritage Restaurant">
+    <link rel="canonical" href="https://ramakrishnalunchhome.concept">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ramakrishna Lunch Home | Authentic South Indian">
+    <meta property="og:description" content="Experience authentic South Indian heritage cuisine. Fresh Dosa, Idli, and traditional Filter Coffee in Kolkata.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee': '#4A2E1B',
+                        'banana': '#5B8C5A',
+                        'gold': '#D4AF37',
+                        'ivory': '#FDFBF7',
+                        'dark-brown': '#2C1A10'
+                    },
+                    fontFamily: {
+                        'playfair': ['"Playfair Display"', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary: #4A2E1B;
+            --secondary: #5B8C5A;
+            --accent: #D4AF37;
+            --bg-color: #FDFBF7;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* Typography overrides */
+        h1, h2, h3, h4, h5, h6, .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        p, a, span, button, .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Glassmorphism */
+        .glass-nav {
+            background: rgba(253, 251, 247, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(74, 46, 27, 0.1);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 30px rgba(74, 46, 27, 0.08);
+        }
+
+        /* Image Hover Zoom */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .group:hover .img-zoom {
+            transform: scale(1.08);
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes steam {
+            0% { transform: translateY(0) scaleX(1); opacity: 0; }
+            15% { opacity: 1; }
+            50% { transform: translateY(-50px) scaleX(1.2); opacity: 0.5; }
+            95% { opacity: 0; }
+            100% { transform: translateY(-100px) scaleX(1.5); opacity: 0; }
+        }
+        
+        .steam-particle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            filter: blur(8px);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+        .loader-leaf {
+            font-size: 3rem;
+            color: var(--secondary);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* Scroll Progress */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 10000;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu {
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        #mobile-menu.open {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        /* Gallery Masonry */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1rem;
+        }
+        @media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+        @media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+
+        /* Button hover effect */
+        .btn-gold {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .btn-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        .btn-gold:hover::before {
+            left: 100%;
+        }
+
+        /* Pattern overlay */
+        .pattern-overlay {
+            background-image: radial-gradient(var(--accent) 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+    </style>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Ramakrishna Lunch Home",
+      "image": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1920&auto=format&fit=crop",
+      "@id": "",
+      "url": "https://ramakrishnalunchhome.concept",
+      "telephone": "03324665612",
+      "priceRange": "₹200-400",
+      "menu": "https://ramakrishnalunchhome.concept/#menu",
+      "servesCuisine": "South Indian, Pure Vegetarian",
+      "acceptsReservations": "False",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "36 Bhupendra Mansion, Kavi Bharati Sarani, Southern Avenue",
+        "addressLocality": "Kolkata",
+        "addressRegion": "West Bengal",
+        "postalCode": "700029",
+        "addressCountry": "IN"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.2",
+        "reviewCount": "2000"
+      }
+    }
+    </script>
+</head>
+<body class="antialiased selection:bg-banana selection:text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <i class="fa-solid fa-leaf loader-leaf mb-4"></i>
+        <h2 class="font-playfair text-2xl font-bold text-coffee tracking-wider">RAMAKRISHNA</h2>
+        <p class="font-poppins text-sm text-banana tracking-widest mt-1">LUNCH HOME</p>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full top-0 z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex flex-col items-center group">
+                    <span class="font-playfair text-xl md:text-2xl font-bold text-coffee group-hover:text-banana transition-colors">Ramakrishna</span>
+                    <span class="font-poppins text-[10px] md:text-xs tracking-[0.2em] text-accent uppercase">Lunch Home</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <nav class="hidden md:flex space-x-8 items-center">
+                    <a href="#about" class="text-sm font-medium text-coffee hover:text-banana transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">Our Story</a>
+                    <a href="#specialities" class="text-sm font-medium text-coffee hover:text-banana transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">Specialities</a>
+                    <a href="#menu" class="text-sm font-medium text-coffee hover:text-banana transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">Menu</a>
+                    <a href="#gallery" class="text-sm font-medium text-coffee hover:text-banana transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">Gallery</a>
+                    <a href="#reviews" class="text-sm font-medium text-coffee hover:text-banana transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-accent hover:after:w-full after:transition-all after:duration-300">Reviews</a>
+                    <a href="#contact" class="btn-gold px-6 py-2 bg-coffee text-ivory text-sm font-medium rounded-full shadow-lg shadow-coffee/20 hover:bg-dark-brown hover:shadow-xl transition-all">Visit Us</a>
+                </nav>
+
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden flex items-center text-coffee focus:outline-none" aria-label="Toggle menu">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-ivory flex flex-col pt-24 px-6 pb-6 md:hidden overflow-y-auto">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-coffee text-3xl focus:outline-none" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex flex-col space-y-6 text-center mt-10">
+                <a href="#about" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Our Story</a>
+                <a href="#specialities" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Specialities</a>
+                <a href="#menu" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Menu</a>
+                <a href="#gallery" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Gallery</a>
+                <a href="#reviews" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Reviews</a>
+                <a href="#contact" class="mobile-link text-2xl font-playfair text-coffee hover:text-banana">Contact</a>
+                <div class="pt-8 border-t border-coffee/10">
+                    <a href="tel:03324665612" class="inline-block px-8 py-3 bg-banana text-white rounded-full font-medium shadow-lg shadow-banana/30 mb-4 w-full"><i class="fa-solid fa-phone mr-2"></i> Call Now</a>
+                    <a href="https://maps.google.com/?q=36+Bhupendra+Mansion+Southern+Avenue+Kolkata" target="_blank" class="inline-block px-8 py-3 border border-coffee text-coffee rounded-full font-medium w-full"><i class="fa-solid fa-map-location-dot mr-2"></i> Get Directions</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden bg-dark-brown">
+        <!-- Parallax Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=1920&auto=format&fit=crop" alt="Traditional South Indian Breakfast" class="w-full h-full object-cover object-center hero-img opacity-80" data-speed="0.5">
+            <div class="absolute inset-0 bg-gradient-to-r from-dark-brown/90 via-dark-brown/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-brown/90 via-transparent to-transparent"></div>
+        </div>
+
+        <!-- Steam Container -->
+        <div id="steam-container" class="absolute inset-0 z-10 pointer-events-none"></div>
+
+        <!-- Content -->
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center justify-between mt-16">
+            <div class="w-full md:w-2/3 lg:w-1/2 gs-hero-text">
+                <span class="inline-block py-1 px-3 rounded-full bg-accent/20 text-accent text-sm font-medium tracking-wide mb-4 border border-accent/30 backdrop-blur-sm">
+                    <i class="fa-solid fa-leaf mr-2 text-banana"></i>Pure Vegetarian
+                </span>
+                <h1 class="font-playfair text-4xl md:text-6xl lg:text-7xl text-ivory font-bold leading-tight mb-4 drop-shadow-lg">
+                    Authentic <span class="text-accent italic">South Indian</span> Breakfast Since Generations.
+                </h1>
+                <p class="font-poppins text-lg md:text-xl text-ivory/90 mb-8 font-light max-w-lg">
+                    Fresh Dosa • Soft Idli • Golden Vada • Traditional Filter Coffee
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#menu" class="btn-gold px-8 py-3 bg-banana text-white font-medium rounded-full shadow-lg shadow-banana/30 hover:bg-[#4a734a] hover:-translate-y-1 transition-all flex items-center">
+                        Explore Menu <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="https://maps.google.com/?q=36+Bhupendra+Mansion+Southern+Avenue+Kolkata" target="_blank" class="px-8 py-3 bg-transparent border border-ivory/50 text-ivory font-medium rounded-full hover:bg-ivory/10 backdrop-blur-sm transition-all flex items-center">
+                        <i class="fa-solid fa-location-dot mr-2 text-accent"></i> Get Directions
+                    </a>
+                </div>
+            </div>
+
+            <!-- Floating Rating Card -->
+            <div class="hidden lg:block w-1/3 relative h-[400px]">
+                <div class="floating absolute right-10 top-20 glass-card p-6 rounded-2xl w-64">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex flex-col">
+                            <span class="text-3xl font-bold text-coffee">4.2</span>
+                            <div class="flex text-accent text-sm mt-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-regular fa-star-half-stroke"></i>
+                            </div>
+                        </div>
+                        <div class="bg-[#EA4335] w-10 h-10 rounded-full flex items-center justify-center text-white shadow-md">
+                            <i class="fa-brands fa-google text-xl"></i>
+                        </div>
+                    </div>
+                    <p class="font-poppins text-sm text-coffee font-medium">Based on 2000+ reviews</p>
+                    <p class="font-poppins text-xs text-coffee/60 mt-2 italic">"The most authentic filter coffee in Kolkata."</p>
+                </div>
+                
+                <!-- Decorative Element -->
+                <div class="floating absolute -right-4 bottom-10 bg-banana w-24 h-24 rounded-full mix-blend-multiply filter blur-2xl opacity-50" style="animation-delay: -2s;"></div>
+                <div class="floating absolute right-40 top-0 bg-accent w-32 h-32 rounded-full mix-blend-multiply filter blur-2xl opacity-30" style="animation-delay: -4s;"></div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center text-ivory/70 hover:text-ivory transition-colors animate-bounce">
+            <span class="text-xs uppercase tracking-widest mb-2 font-poppins">Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden bg-ivory">
+        <div class="pattern-overlay"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Image Collage -->
+                <div class="w-full lg:w-1/2 relative gs-reveal-left">
+                    <div class="relative w-[90%] mx-auto lg:mr-auto lg:ml-0 aspect-[4/5] rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1596634125348-18e4b7b68623?q=80&w=800&auto=format&fit=crop" alt="Traditional Filter Coffee Making" class="w-full h-full object-cover" loading="lazy">
+                        <div class="absolute inset-0 bg-coffee/10"></div>
+                    </div>
+                    <!-- Overlapping image -->
+                    <div class="absolute -bottom-10 -right-4 lg:-right-10 w-3/5 aspect-square rounded-full border-8 border-ivory overflow-hidden shadow-xl img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1626776876729-bab4369a5a5a?q=80&w=600&auto=format&fit=crop" alt="Spices and ingredients" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <!-- Badge -->
+                    <div class="absolute top-10 -left-6 bg-accent text-white w-24 h-24 rounded-full flex flex-col justify-center items-center shadow-lg transform -rotate-12">
+                        <span class="font-playfair text-2xl font-bold">100%</span>
+                        <span class="font-poppins text-[10px] uppercase tracking-wider text-center leading-tight">Pure<br>Veg</span>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2 mt-16 lg:mt-0 gs-reveal-right">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-px bg-accent"></div>
+                        <span class="text-accent font-medium tracking-widest uppercase text-sm">Our Heritage</span>
+                    </div>
+                    <h2 class="font-playfair text-4xl md:text-5xl text-coffee font-bold mb-6 leading-tight">
+                        A Tradition of <br>Taste & Hospitality
+                    </h2>
+                    <p class="font-poppins text-coffee/80 mb-6 leading-relaxed">
+                        Step into Ramakrishna Lunch Home, where every meal is a celebration of authentic South Indian culinary heritage. For generations, we have been serving the bustling streets of Kolkata with recipes passed down through families, preserving the true essence of Udupi-style cooking.
+                    </p>
+                    <p class="font-poppins text-coffee/80 mb-8 leading-relaxed">
+                        From the crispiness of our morning Dosas to the comforting warmth of our traditional Filter Coffee served in brass dabarahs, we believe in using only the freshest ingredients. Our commitment to purity and traditional cooking methods ensures that every bite reminds you of home.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mt-8 border-t border-coffee/10 pt-8">
+                        <div>
+                            <p class="font-playfair text-4xl text-accent font-bold mb-1 counter" data-target="15">0</p>
+                            <p class="text-sm font-medium text-coffee uppercase tracking-wider">Varieties of Dosa</p>
+                        </div>
+                        <div>
+                            <p class="font-playfair text-4xl text-accent font-bold mb-1"><span class="counter" data-target="2000">0</span>+</p>
+                            <p class="text-sm font-medium text-coffee uppercase tracking-wider">Happy Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Features -->
+    <section class="py-16 bg-coffee relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="text-center gs-fade-up">
+                    <div class="w-16 h-16 mx-auto bg-ivory/10 rounded-full flex items-center justify-center mb-4 text-accent text-2xl border border-ivory/20 transition-transform hover:scale-110">
+                        <i class="fa-solid fa-bowl-rice"></i>
+                    </div>
+                    <h3 class="font-playfair text-ivory text-lg font-semibold mb-2">Traditional Recipes</h3>
+                    <p class="text-ivory/60 text-xs font-poppins px-4">Authentic methods passed down through generations.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="text-center gs-fade-up" style="transition-delay: 100ms;">
+                    <div class="w-16 h-16 mx-auto bg-ivory/10 rounded-full flex items-center justify-center mb-4 text-accent text-2xl border border-ivory/20 transition-transform hover:scale-110">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="font-playfair text-ivory text-lg font-semibold mb-2">Fresh Ingredients</h3>
+                    <p class="text-ivory/60 text-xs font-poppins px-4">Sourced daily for the most vibrant flavors.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="text-center gs-fade-up" style="transition-delay: 200ms;">
+                    <div class="w-16 h-16 mx-auto bg-ivory/10 rounded-full flex items-center justify-center mb-4 text-accent text-2xl border border-ivory/20 transition-transform hover:scale-110">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-playfair text-ivory text-lg font-semibold mb-2">Filter Coffee</h3>
+                    <p class="text-ivory/60 text-xs font-poppins px-4">Freshly roasted and brewed to perfection.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="text-center gs-fade-up" style="transition-delay: 300ms;">
+                    <div class="w-16 h-16 mx-auto bg-ivory/10 rounded-full flex items-center justify-center mb-4 text-accent text-2xl border border-ivory/20 transition-transform hover:scale-110">
+                        <i class="fa-solid fa-people-roof"></i>
+                    </div>
+                    <h3 class="font-playfair text-ivory text-lg font-semibold mb-2">Family Friendly</h3>
+                    <p class="text-ivory/60 text-xs font-poppins px-4">A warm atmosphere for everyone to enjoy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specialities Section -->
+    <section id="specialities" class="py-24 bg-ivory">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 gs-fade-up">
+                <span class="text-accent font-medium tracking-widest uppercase text-sm mb-2 block">Chef's Selection</span>
+                <h2 class="font-playfair text-4xl md:text-5xl text-coffee font-bold mb-4">Our Specialities</h2>
+                <div class="w-24 h-1 bg-accent mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Speciality 1 -->
+                <div class="group cursor-pointer gs-fade-up">
+                    <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 shadow-lg img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1627308595229-7830f5c90683?q=80&w=800&auto=format&fit=crop" alt="Masala Dosa" class="w-full h-full object-cover img-zoom" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-brown/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-banana shadow-sm">Bestseller</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-playfair text-2xl font-bold text-coffee mb-2">Ghee Roast Masala Dosa</h3>
+                        <p class="font-poppins text-sm text-coffee/70 mb-3">Crispy golden dosa roasted in pure ghee, stuffed with spiced potato mash, served with three chutneys & sambar.</p>
+                        <p class="font-poppins text-accent font-semibold text-lg">₹120</p>
+                    </div>
+                </div>
+
+                <!-- Speciality 2 -->
+                <div class="group cursor-pointer gs-fade-up" style="transition-delay: 150ms;">
+                    <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 shadow-lg img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=800&auto=format&fit=crop" alt="Idli Vada" class="w-full h-full object-cover img-zoom" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-brown/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-accent shadow-sm">Morning Special</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-playfair text-2xl font-bold text-coffee mb-2">Idli Vada Combo</h3>
+                        <p class="font-poppins text-sm text-coffee/70 mb-3">Soft, fluffy steamed rice cakes paired with crispy golden lentil donuts. A classic comforting breakfast.</p>
+                        <p class="font-poppins text-accent font-semibold text-lg">₹90</p>
+                    </div>
+                </div>
+
+                <!-- Speciality 3 -->
+                <div class="group cursor-pointer gs-fade-up" style="transition-delay: 300ms;">
+                    <div class="relative overflow-hidden rounded-2xl aspect-[4/3] mb-6 shadow-lg img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=800&auto=format&fit=crop" alt="South Indian Thali" class="w-full h-full object-cover img-zoom" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-brown/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-coffee shadow-sm">Lunch Only</div>
+                    </div>
+                    <div class="text-center px-4">
+                        <h3 class="font-playfair text-2xl font-bold text-coffee mb-2">Traditional Banana Leaf Meal</h3>
+                        <p class="font-poppins text-sm text-coffee/70 mb-3">Authentic unlimited meal featuring rice, sambar, rasam, kootu, poriyal, appalam, pickle, and sweet.</p>
+                        <p class="font-poppins text-accent font-semibold text-lg">₹180</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Menu Section -->
+    <section id="menu" class="py-24 bg-white relative">
+        <!-- Subtle background texture -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%234A2E1B\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gs-fade-up">
+                <div>
+                    <span class="text-accent font-medium tracking-widest uppercase text-sm mb-2 block">Discover</span>
+                    <h2 class="font-playfair text-4xl md:text-5xl text-coffee font-bold">Our Menu</h2>
+                </div>
+                <p class="font-poppins text-sm text-coffee/60 mt-4 md:mt-0 max-w-xs text-right">Prices are subject to change. All items are prepared fresh daily using pure ingredients.</p>
+            </div>
+
+            <!-- Menu Categories Tabs (Visual only for layout) -->
+            <div class="flex overflow-x-auto hide-scrollbar space-x-8 mb-12 border-b border-coffee/10 pb-4 gs-fade-up">
+                <button class="font-playfair text-xl font-bold text-banana border-b-2 border-banana pb-2 whitespace-nowrap">Breakfast</button>
+                <button class="font-playfair text-xl font-bold text-coffee/50 hover:text-coffee transition-colors whitespace-nowrap">Meals</button>
+                <button class="font-playfair text-xl font-bold text-coffee/50 hover:text-coffee transition-colors whitespace-nowrap">Beverages</button>
+                <button class="font-playfair text-xl font-bold text-coffee/50 hover:text-coffee transition-colors whitespace-nowrap">Desserts</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1627308595229-7830f5c90683?q=80&w=200&auto=format&fit=crop" alt="Plain Dosa" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Plain Dosa</h4>
+                            <span class="font-poppins font-semibold text-accent">₹60</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Thin, crisp crepe made from fermented rice and lentil batter.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=200&auto=format&fit=crop" alt="Idli" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Steamed Idli (2 pcs)</h4>
+                            <span class="font-poppins font-semibold text-accent">₹40</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Soft and fluffy steamed rice cakes, served with chutney and sambar.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1606491956689-2ea866880c84?q=80&w=200&auto=format&fit=crop" alt="Vada" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Medu Vada (2 pcs)</h4>
+                            <span class="font-poppins font-semibold text-accent">₹50</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Crispy exterior, soft interior lentil donuts seasoned with pepper and cumin.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1630409351241-19e48df1265b?q=80&w=200&auto=format&fit=crop" alt="Uttapam" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Onion Tomato Uttapam</h4>
+                            <span class="font-poppins font-semibold text-accent">₹90</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Thick pancake topped with finely chopped onions, tomatoes, and coriander.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1627308595229-7830f5c90683?q=80&w=200&auto=format&fit=crop" alt="Paper Roast" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Paper Roast Dosa</h4>
+                            <span class="font-poppins font-semibold text-accent">₹110</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Extra large, paper-thin, extra crispy dosa.</p>
+                    </div>
+                </div>
+
+                <!-- Menu Item -->
+                <div class="flex items-start group gs-menu-item">
+                    <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 shadow-md border-2 border-ivory img-zoom-container">
+                        <img src="https://images.unsplash.com/photo-1596634125348-18e4b7b68623?q=80&w=200&auto=format&fit=crop" alt="Filter Coffee" class="w-full h-full object-cover img-zoom" loading="lazy">
+                    </div>
+                    <div class="ml-6 flex-grow">
+                        <div class="flex justify-between items-center border-b border-dashed border-coffee/30 pb-2 mb-2">
+                            <h4 class="font-playfair text-xl font-bold text-coffee group-hover:text-banana transition-colors">Degree Filter Coffee</h4>
+                            <span class="font-poppins font-semibold text-accent">₹40</span>
+                        </div>
+                        <p class="font-poppins text-sm text-coffee/60 line-clamp-2">Strong, frothy coffee brewed in a traditional Indian filter, mixed with boiled milk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#contact" class="inline-block border-2 border-coffee text-coffee font-medium px-8 py-3 rounded-full hover:bg-coffee hover:text-ivory transition-colors">View Full Menu In-Store</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Divider -->
+    <section class="h-[40vh] relative overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1626776876729-bab4369a5a5a?q=80&w=1920&auto=format&fit=crop" alt="Spices" class="w-full h-full object-cover bg-fixed parallax-bg">
+            <div class="absolute inset-0 bg-dark-brown/70"></div>
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <i class="fa-solid fa-leaf text-accent text-4xl mb-4 opacity-80"></i>
+            <h2 class="font-playfair text-3xl md:text-5xl text-ivory font-bold max-w-3xl leading-snug">"The secret ingredient is always tradition."</h2>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-ivory">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 gs-fade-up">
+                <span class="text-accent font-medium tracking-widest uppercase text-sm mb-2 block">Visual Journey</span>
+                <h2 class="font-playfair text-4xl md:text-5xl text-coffee font-bold">Gallery</h2>
+            </div>
+
+            <!-- Masonry Grid -->
+            <div class="masonry-grid">
+                <!-- Item 1 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1596634125348-18e4b7b68623?q=80&w=600&auto=format&fit=crop" alt="Coffee Pouring" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1627308595229-7830f5c90683?q=80&w=600&auto=format&fit=crop" alt="Dosa Preparation" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=600&auto=format&fit=crop" alt="Thali Layout" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                 <!-- Item 4 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1589301760014-d929f39ce9b1?q=80&w=600&auto=format&fit=crop" alt="Fresh Idlis" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                 <!-- Item 5 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1626776876729-bab4369a5a5a?q=80&w=600&auto=format&fit=crop" alt="Spices" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+                 <!-- Item 6 -->
+                <div class="masonry-item group relative overflow-hidden rounded-xl shadow-md cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=600&auto=format&fit=crop" alt="Restaurant Ambiance" class="w-full h-auto img-zoom" loading="lazy">
+                    <div class="absolute inset-0 bg-dark-brown/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <i class="fa-solid fa-expand text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <button class="text-sm font-poppins text-coffee hover:text-accent font-medium uppercase tracking-wider transition-colors"><i class="fa-brands fa-instagram mr-2"></i>Follow us on Instagram</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 bg-banana/5 rounded-full blur-3xl -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 gs-fade-up">
+                <span class="text-accent font-medium tracking-widest uppercase text-sm mb-2 block">Testimonials</span>
+                <h2 class="font-playfair text-4xl md:text-5xl text-coffee font-bold">What Our Guests Say</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-ivory p-8 rounded-2xl shadow-sm border border-coffee/5 gs-fade-up relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-accent/20 absolute top-6 right-6"></i>
+                    <div class="flex text-accent text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-poppins text-coffee/80 text-sm mb-6 leading-relaxed italic">"The best place for authentic South Indian breakfast in Kolkata. The filter coffee is a must-have. Reminds me of the small eateries in Udupi. Clean place, quick service, and family-friendly."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-coffee/10 rounded-full flex items-center justify-center text-coffee font-bold">G</div>
+                        <div class="ml-3">
+                            <p class="font-poppins text-sm font-bold text-coffee">Local Guide</p>
+                            <p class="font-poppins text-xs text-coffee/50">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-ivory p-8 rounded-2xl shadow-sm border border-coffee/5 gs-fade-up" style="transition-delay: 150ms;">
+                    <i class="fa-solid fa-quote-left text-4xl text-accent/20 absolute top-6 right-6"></i>
+                    <div class="flex text-accent text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-poppins text-coffee/80 text-sm mb-6 leading-relaxed italic">"Been coming here for years. The consistency in taste is remarkable. The Ghee Roast Dosa is perfectly crispy and the chutneys are always fresh. Highly recommend for a Sunday morning breakfast."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-banana/20 rounded-full flex items-center justify-center text-banana font-bold">R</div>
+                        <div class="ml-3">
+                            <p class="font-poppins text-sm font-bold text-coffee">Regular Customer</p>
+                            <p class="font-poppins text-xs text-coffee/50">Zomato Review</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-ivory p-8 rounded-2xl shadow-sm border border-coffee/5 gs-fade-up" style="transition-delay: 300ms;">
+                    <i class="fa-solid fa-quote-left text-4xl text-accent/20 absolute top-6 right-6"></i>
+                    <div class="flex text-accent text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="font-poppins text-coffee/80 text-sm mb-6 leading-relaxed italic">"Had the South Indian Thali for lunch. Excellent spread! The sambar has that authentic home-cooked flavor. Prices are very reasonable for the quality and quantity provided. Will definitely visit again."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-accent/20 rounded-full flex items-center justify-center text-accent font-bold">T</div>
+                        <div class="ml-3">
+                            <p class="font-poppins text-sm font-bold text-coffee">Food Blogger</p>
+                            <p class="font-poppins text-xs text-coffee/50">Google Review</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="bg-dark-brown text-ivory border-b border-white/10">
+        <div class="flex flex-col lg:flex-row">
+            <!-- Contact Details -->
+            <div class="w-full lg:w-1/2 p-8 md:p-16 lg:p-24 flex flex-col justify-center">
+                <span class="text-accent font-medium tracking-widest uppercase text-sm mb-2 block">Visit Us</span>
+                <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-10">We'd love to host you</h2>
+                
+                <div class="space-y-8">
+                    <div class="flex items-start gs-fade-up">
+                        <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-accent shrink-0 mt-1">
+                            <i class="fa-solid fa-location-dot text-xl"></i>
+                        </div>
+                        <div class="ml-6">
+                            <h4 class="font-playfair text-xl font-semibold mb-2">Location</h4>
+                            <p class="font-poppins text-ivory/70 text-sm leading-relaxed">
+                                36 Bhupendra Mansion,<br>
+                                Kavi Bharati Sarani, Southern Avenue,<br>
+                                Kolkata, West Bengal 700029
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gs-fade-up" style="transition-delay: 100ms;">
+                        <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-accent shrink-0 mt-1">
+                            <i class="fa-solid fa-clock text-xl"></i>
+                        </div>
+                        <div class="ml-6">
+                            <h4 class="font-playfair text-xl font-semibold mb-2">Hours</h4>
+                            <p class="font-poppins text-ivory/70 text-sm mb-1">Breakfast: 7:00 AM - 11:30 AM</p>
+                            <p class="font-poppins text-ivory/70 text-sm">Lunch & Dinner: 12:00 PM - 10:00 PM</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gs-fade-up" style="transition-delay: 200ms;">
+                        <div class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-accent shrink-0 mt-1">
+                            <i class="fa-solid fa-phone text-xl"></i>
+                        </div>
+                        <div class="ml-6">
+                            <h4 class="font-playfair text-xl font-semibold mb-2">Contact</h4>
+                            <p class="font-poppins text-ivory/70 text-sm mb-3">For inquiries or bulk orders.</p>
+                            <a href="tel:03324665612" class="inline-flex items-center font-poppins text-xl font-bold text-banana hover:text-accent transition-colors">
+                                033 2466 5612
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Map -->
+            <div class="w-full lg:w-1/2 h-[500px] lg:h-auto relative group">
+                <!-- Using a generic map embed centered on Kolkata with a marker concept since actual API key is not provided for dynamic map, using standard iframe embed structure -->
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3685.228519965259!2d88.3562!3d22.5147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDMwJzUyLjkiTiA4OMKwMjEnMjIuMyJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0; filter: grayscale(20%) contrast(1.2);" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    title="Google Maps location of Ramakrishna Lunch Home">
+                </iframe>
+                
+                <!-- Map Overlay buttons -->
+                <div class="absolute bottom-8 right-8 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <a href="https://maps.google.com/?q=36+Bhupendra+Mansion+Southern+Avenue+Kolkata" target="_blank" class="bg-white text-coffee px-6 py-3 rounded-full font-poppins text-sm font-semibold shadow-xl hover:bg-banana hover:text-white transition-colors flex items-center justify-center">
+                        <i class="fa-solid fa-map-location-dot mr-2"></i> Open in Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#1A0F09] text-ivory pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 border-b border-white/10 pb-12 mb-8">
+                
+                <!-- Brand -->
+                <div class="lg:col-span-1">
+                    <a href="#" class="flex flex-col items-start mb-6">
+                        <span class="font-playfair text-2xl font-bold text-white">Ramakrishna</span>
+                        <span class="font-poppins text-xs tracking-[0.2em] text-accent uppercase">Lunch Home</span>
+                    </a>
+                    <p class="font-poppins text-sm text-ivory/60 leading-relaxed mb-6">Serving authentic South Indian pure vegetarian delicacies in Kolkata for generations. A taste of tradition in every bite.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-ivory/70 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-ivory/70 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-ivory/70 hover:bg-accent hover:text-white transition-all"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="font-playfair text-lg font-bold mb-6 text-white">Quick Links</h4>
+                    <ul class="space-y-3 font-poppins text-sm text-ivory/60">
+                        <li><a href="#home" class="hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-accent transition-colors">Our Story</a></li>
+                        <li><a href="#menu" class="hover:text-accent transition-colors">Full Menu</a></li>
+                        <li><a href="#gallery" class="hover:text-accent transition-colors">Gallery</a></li>
+                        <li><a href="#reviews" class="hover:text-accent transition-colors">Customer Reviews</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-playfair text-lg font-bold mb-6 text-white">Contact Info</h4>
+                    <ul class="space-y-4 font-poppins text-sm text-ivory/60">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-accent"></i>
+                            <span>36 Bhupendra Mansion,<br>Southern Avenue, Kolkata</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone mr-3 text-accent"></i>
+                            <span>033 2466 5612</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-envelope mr-3 text-accent"></i>
+                            <span>hello@ramakrishnalunchhome.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Highlights -->
+                <div>
+                    <h4 class="font-playfair text-lg font-bold mb-6 text-white">Highlights</h4>
+                    <ul class="space-y-3 font-poppins text-sm text-ivory/60">
+                        <li><i class="fa-solid fa-check text-banana mr-2"></i> Pure Vegetarian</li>
+                        <li><i class="fa-solid fa-check text-banana mr-2"></i> Fresh Filter Coffee</li>
+                        <li><i class="fa-solid fa-check text-banana mr-2"></i> Family Friendly</li>
+                        <li><i class="fa-solid fa-check text-banana mr-2"></i> Authentic Recipes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs font-poppins text-ivory/40">
+                <p>&copy; <span id="year"></span> Ramakrishna Lunch Home. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 max-w-xl text-center md:text-right border border-white/10 p-3 rounded bg-white/5">
+                    <p class="font-bold text-white/50 mb-1"><i class="fa-solid fa-circle-info mr-1"></i> DISCLAIMER</p>
+                    <p>This is an unofficial concept website created using publicly available information for demonstration purposes only and is not officially affiliated with Ramakrishna Lunch Home.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 left-6 z-40 flex flex-col gap-3">
+        <a href="tel:03324665612" class="w-12 h-12 bg-banana text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" aria-label="Call Now">
+            <i class="fa-solid fa-phone text-xl"></i>
+        </a>
+    </div>
+    
+    <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+        <button id="back-to-top" class="w-12 h-12 bg-coffee text-white rounded-full flex items-center justify-center shadow-lg hover:bg-accent transition-colors opacity-0 invisible translate-y-4 duration-300" aria-label="Back to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Sticky Bottom CTA (Visible only on mobile) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full bg-white border-t border-coffee/10 p-3 flex justify-between gap-3 z-30 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+        <a href="tel:03324665612" class="flex-1 bg-banana text-white py-2 rounded-lg text-center font-poppins font-medium text-sm flex items-center justify-center">
+            <i class="fa-solid fa-phone mr-2"></i> Call
+        </a>
+        <a href="https://maps.google.com/?q=36+Bhupendra+Mansion+Southern+Avenue+Kolkata" target="_blank" class="flex-1 bg-coffee text-white py-2 rounded-lg text-center font-poppins font-medium text-sm flex items-center justify-center">
+            <i class="fa-solid fa-location-dot mr-2"></i> Map
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Register ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Loader
+            const loader = document.getElementById('loader');
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        initHeroAnimations();
+                    }, 500);
+                }, 800); // Small delay to show loader design
+            });
+
+            // Scroll Progress Bar & Navbar styling
+            const progressBar = document.getElementById('scroll-progress');
+            const navbar = document.getElementById('navbar');
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                // Progress bar
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + "%";
+
+                // Navbar glass effect
+                if (winScroll > 50) {
+                    navbar.classList.add('shadow-md');
+                    navbar.style.padding = '0';
+                } else {
+                    navbar.classList.remove('shadow-md');
+                }
+
+                // Back to top button
+                if (winScroll > 500) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-4');
+                }
+            });
+
+            // Back to top click
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const closeMenuBtn = document.getElementById('close-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            function toggleMenu() {
+                mobileMenu.classList.toggle('open');
+                document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMenu);
+            closeMenuBtn.addEventListener('click', toggleMenu);
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+
+            // Generate Steam Particles
+            function createSteam() {
+                const container = document.getElementById('steam-container');
+                if(!container) return;
+                
+                for(let i=0; i<15; i++) {
+                    let particle = document.createElement('div');
+                    particle.className = 'steam-particle';
+                    
+                    // Random positioning bottom half
+                    let left = 20 + Math.random() * 60; // 20% to 80% width
+                    let bottom = 10 + Math.random() * 30;
+                    
+                    let size = 20 + Math.random() * 40;
+                    let duration = 4 + Math.random() * 3;
+                    let delay = Math.random() * 5;
+                    
+                    particle.style.left = `${left}%`;
+                    particle.style.bottom = `${bottom}%`;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.animation = `steam ${duration}s ease-in-out ${delay}s infinite`;
+                    
+                    container.appendChild(particle);
+                }
+            }
+            createSteam();
+
+            // Counters Animation
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200; // lower is slower
+
+            const animateCounters = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const targetValue = +target.getAttribute('data-target');
+                        
+                        const updateCount = () => {
+                            const count = +target.innerText;
+                            const inc = targetValue / speed;
+
+                            if (count < targetValue) {
+                                target.innerText = Math.ceil(count + inc);
+                                setTimeout(updateCount, 20);
+                            } else {
+                                target.innerText = targetValue;
+                            }
+                        };
+                        updateCount();
+                        observer.unobserve(target);
+                    }
+                });
+            };
+
+            const counterObserver = new IntersectionObserver(animateCounters, {
+                threshold: 0.5
+            });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+
+            // GSAP Animations
+            function initHeroAnimations() {
+                const tl = gsap.timeline();
+                
+                tl.from('.gs-hero-text > *', {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power3.out"
+                })
+                .from('.floating', {
+                    scale: 0.8,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "back.out(1.7)"
+                }, "-=0.5");
+            }
+
+            // ScrollTrigger Animations
+            
+            // Fade Up Elements
+            gsap.utils.toArray('.gs-fade-up').forEach(elem => {
+                gsap.from(elem, {
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                });
+            });
+
+            // Reveal Left/Right (About Section)
+            gsap.from('.gs-reveal-left', {
+                scrollTrigger: {
+                    trigger: '.gs-reveal-left',
+                    start: "top 80%",
+                },
+                x: -50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+            
+            gsap.from('.gs-reveal-right', {
+                scrollTrigger: {
+                    trigger: '.gs-reveal-right',
+                    start: "top 80%",
+                },
+                x: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power2.out"
+            });
+
+            // Menu Items Stagger
+            gsap.from('.gs-menu-item', {
+                scrollTrigger: {
+                    trigger: '#menu',
+                    start: "top 70%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+
+            // Parallax Backgrounds
+            gsap.utils.toArray('.parallax-bg').forEach(bg => {
+                gsap.to(bg, {
+                    yPercent: 30,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: bg.parentElement,
+                        start: "top bottom", 
+                        end: "bottom top",
+                        scrub: true
+                    } 
+                });
+            });
+            
+            // Hero Image Parallax (subtle)
+            gsap.to('.hero-img', {
+                yPercent: 15,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: '#home',
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+        });
+    </script>
+</body>
+</html>
